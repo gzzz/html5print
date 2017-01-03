@@ -89,10 +89,18 @@ class JSBeautifier(BeautifierBase):
         }
 
         """
-        parser = slimit.parser.Parser()
-        tree = parser.parse(decodeText(js))
-        text = tree.to_ecma()
-        return cls._reindenting(text, indent)
+
+        result = js
+
+        try:
+            parser = slimit.parser.Parser()
+            tree = parser.parse(decodeText(js))
+            text = tree.to_ecma()
+            result = cls._reindenting(text, indent)
+        except:
+            pass
+
+        return result
 
     @classmethod
     def beautifyTextInHTML(cls, html, indent=2, encoding=None):

@@ -24,6 +24,7 @@ import bs4
 from .utils import BeautifierBase
 from .cssprint import CSSBeautifier
 from .jsprint import JSBeautifier
+from .jsonprint import JSONBeautifier
 
 
 class HTMLBeautifier(BeautifierBase):
@@ -110,6 +111,7 @@ class HTMLBeautifier(BeautifierBase):
         html = cls._prettifyWithIndent(html, indent)
         html = JSBeautifier.beautifyTextInHTML(html, indent, encoding)
         html = CSSBeautifier.beautifyTextInHTML(html, indent, encoding)
+        html = JSONBeautifier.beautifyTextInHTML(html, indent, encoding)
         return html
 
     @classmethod

@@ -387,18 +387,26 @@ class CSSBeautifier(BeautifierBase):
             }
         }
         """
-        text = decodeText(css)
-        extra = cls._tinycss2ParserFlag()
-        ast = tinycss2.parse_component_value_list(text, **extra)
-        parsed = []
-        for ast, isCSSRule in cls._getCSSObjects(ast):
-            if isCSSRule:
-                text = cls._serializeCSSRule(ast, indent)
-            else:
-                text = cls._serializeComments(ast)
-            if text:
-                parsed.append(text)
-        return os.linesep.join(parsed)
+
+        result = css
+
+        try:
+            text = decodeText(css)
+            extra = cls._tinycss2ParserFlag()
+            ast = tinycss2.parse_component_value_list(text, **extra)
+            parsed = []
+            for ast, isCSSRule in cls._getCSSObjects(ast):
+                if isCSSRule:
+                    text = cls._serializeCSSRule(ast, indent)
+                else:
+                    text = cls._serializeComments(ast)
+                if text:
+                    parsed.append(text)
+            result = os.linesep.join(parsed)
+        except:
+            pass
+
+        return result
 
     @classmethod
     def beautifyTextInHTML(cls, html, indent=2, encoding=None):

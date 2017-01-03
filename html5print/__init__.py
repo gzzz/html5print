@@ -18,6 +18,7 @@ from __future__ import unicode_literals, absolute_import
 
 from .cssprint import CSSBeautifier
 from .jsprint import JSBeautifier
+from .jsonprint import JSONBeautifier
 from .html5print import HTMLBeautifier
 from .utils import decodeText, isUnicode
 

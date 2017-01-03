@@ -123,10 +123,12 @@ def isUnicode(text):
 class BeautifierBase(object):
     """Base Class for Beautifiers"""
 
-    reIndentAndScript = re.compile(r'^(\s*)<script.*?>(.*?)\s*</script',
+    reIndentAndScript = re.compile(r'^(\s*)<script(?:(?:(?!type).)*|[^>]*type="text/javascript"[^>]*)>(.*?)\s*</script',
                                    re.MULTILINE | re.DOTALL | re.IGNORECASE)
     reIndentAndStyle = re.compile(r'^(\s*)<style.*?>(.*?)\s*</style',
                                   re.MULTILINE | re.DOTALL | re.IGNORECASE)
+    reIndentAndJSON = re.compile(r'^(\s*)<script[^>]*type="application/ld\+json"[^>]*>(.*?)\s*</script',
+                                 re.MULTILINE | re.DOTALL | re.IGNORECASE)
 
     @staticmethod
     def _stripHTMLComments(text):
